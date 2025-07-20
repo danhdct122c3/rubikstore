@@ -1,0 +1,14 @@
+#spring.application.name=RubikStore
+server:
+  port: 8080
+  servlet:
+    context-path: /home
+spring:
+  datasource:
+    url: "jdbc:mysql://localhost:3307/rubik_store"
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
