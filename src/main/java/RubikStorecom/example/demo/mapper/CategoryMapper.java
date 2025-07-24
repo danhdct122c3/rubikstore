@@ -5,6 +5,8 @@ import RubikStorecom.example.demo.dto.response.CategoryResponse;
 import RubikStorecom.example.demo.entity.Category;
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(componentModel = "Spring")
 public interface CategoryMapper {
     @Mapping(target = "id", ignore = true)
@@ -15,4 +17,5 @@ public interface CategoryMapper {
     @Mapping(target = "id", ignore = true)
     void updateCategory(@MappingTarget Category category, CategoryRequest request);
 
+    List<CategoryResponse> toCategoryResponse(List<Category> categories);
 }

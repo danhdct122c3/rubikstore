@@ -1,19 +1,16 @@
 package RubikStorecom.example.demo.dto.response;
 
-import RubikStorecom.example.demo.entity.Product;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.List;
-import java.util.Set;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CategoryResponse{
+public class ProductSummary {
     String id;
-    String name;
-    List<ProductSummary> products;
+    String productName;
+    Integer price;
+    // Không có categories để tránh circular
 }

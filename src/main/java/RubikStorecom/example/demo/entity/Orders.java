@@ -23,7 +23,8 @@ public class Orders {
     String userid;
     @CreationTimestamp
     LocalDate orderDate;
-    int total;
+    Integer total;
+    Integer status;
     @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<>();
 

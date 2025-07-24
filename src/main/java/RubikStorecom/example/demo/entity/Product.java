@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -28,12 +29,24 @@ public class Product {
     @CreationTimestamp
     @Column(updatable = false)
     LocalDate created;
-    @ManyToMany
-//    @JoinTable(
-//            name = "product_category",
-//            joinColumns = @JoinColumn(name = "product_id"),
-//            inverseJoinColumns = @JoinColumn(name = "category_id")
-//    )
+    @ManyToMany( fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
     Set<Category> categories;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id); // CHỈ dùng ID, KHÔNG dùng categories
+    }
 
 }
