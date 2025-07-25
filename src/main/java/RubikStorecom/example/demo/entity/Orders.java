@@ -26,6 +26,6 @@ public class Orders {
     Integer total;
     Integer status;
     @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItem> items = new ArrayList<>();
+    List<OrderItem> items = new ArrayList<>();
 
 }

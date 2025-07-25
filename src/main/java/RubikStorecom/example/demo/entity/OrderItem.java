@@ -22,6 +22,6 @@ public class OrderItem {
     @JoinColumn(name = "order_id", nullable = false)
     Orders orderId;
     String productId;
-    int quantity;
-    int price;
+    Integer quantity;
+    Integer price;
 }
