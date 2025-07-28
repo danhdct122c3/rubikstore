@@ -2,6 +2,7 @@ package RubikStorecom.example.demo.controller;
 
 
 import RubikStorecom.example.demo.dto.request.ProductRequest;
+import RubikStorecom.example.demo.dto.response.APIResponse;
 import RubikStorecom.example.demo.dto.response.ProductResponse;
 import RubikStorecom.example.demo.mapper.ProductMapper;
 import RubikStorecom.example.demo.service.ProductService;
@@ -21,30 +22,41 @@ public class ProductController {
 
 
     @PostMapping
-    public ProductResponse createProduct(@RequestBody ProductRequest request) {
-        return productService.createProduct(request);
+    public APIResponse<ProductResponse> createProduct(@RequestBody ProductRequest request) {
+        return APIResponse.<ProductResponse>builder()
+                .result(productService.createProduct(request))
+                .build();
     }
 
     @PutMapping("/{id}")
-    public ProductResponse updateProduct(@RequestBody ProductRequest request,  @PathVariable String id) {
-        return productService.updateProduct(request, id);
+    public APIResponse<ProductResponse> updateProduct(@RequestBody ProductRequest request,  @PathVariable String id) {
+        return APIResponse.<ProductResponse>builder()
+                .result(productService.updateProduct(request, id))
+                .build();
     }
 
     @DeleteMapping("/{id}")
-    public ProductResponse deleteProduct(@PathVariable String id) {
-        return productService.deleteProduct(id);
+    public APIResponse<Void> deleteProduct(@PathVariable String id) {
+        productService.deleteProduct(id);
+        return APIResponse.<Void>builder()
+                .message("product deleted")
+                .build();
     }
 
     @GetMapping
-    public List<ProductResponse> getAllProducts() {
+    public APIResponse<List<ProductResponse>> getAllProducts() {
 
-        return productService.getAllProducts();
+        return APIResponse.<List<ProductResponse>>builder()
+                .result(productService.getAllProducts())
+                .build();
     }
 
     @GetMapping("/{id}")
-    public ProductResponse getProduct(@PathVariable String id) {
+    public APIResponse<ProductResponse> getProduct(@PathVariable String id) {
 
-        return productService.getProduct(id);
+        return APIResponse.<ProductResponse>builder()
+                .result(productService.getProduct(id))
+                .build();
     }
 
 }

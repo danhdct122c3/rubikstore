@@ -2,6 +2,7 @@ package RubikStorecom.example.demo.controller;
 
 import RubikStorecom.example.demo.dto.request.UserCreationRequest;
 import RubikStorecom.example.demo.dto.request.UserUpdateRequest;
+import RubikStorecom.example.demo.dto.response.APIResponse;
 import RubikStorecom.example.demo.dto.response.UserResponse;
 import RubikStorecom.example.demo.entity.User;
 import RubikStorecom.example.demo.mapper.UserMapper;
@@ -27,26 +28,34 @@ public class UserController {
 
 
     @PostMapping
-    UserResponse createUser(@RequestBody UserCreationRequest request) {
+    APIResponse<UserResponse> createUser(@RequestBody UserCreationRequest request) {
 
-        return userService.createUser(request);
+        return APIResponse.<UserResponse>builder()
+                .result(userService.createUser(request))
+                .build();
     }
 
     @GetMapping
-    List<UserResponse> getUsers() {
-        return userService.getUsers();
+    APIResponse<List<UserResponse>> getUsers() {
+        return APIResponse.<List<UserResponse>>builder()
+                .result(userService.getUsers())
+                .build();
     }
 
     @PutMapping("/{userId}")
-    UserResponse updateUser ( @PathVariable String userId ,@RequestBody UserUpdateRequest request) {
+    APIResponse<UserResponse> updateUser ( @PathVariable String userId ,@RequestBody UserUpdateRequest request) {
 
         User updated = userService.updateUser(request, userId);
-        return userMapper.toUserResponse(updated);
+        return  APIResponse.<UserResponse>builder()
+                .result(userMapper.toUserResponse(updated))
+                .build();
     }
 
     @DeleteMapping("/{userId}")
-    public String deleteUser(@PathVariable String userId) {
+    public APIResponse<Void> deleteUser(@PathVariable String userId) {
         userService.delUser(userId);
-       return "User deleted";
+       return APIResponse.<Void>builder()
+                .message("User deleted")
+                .build();
     }
 }
