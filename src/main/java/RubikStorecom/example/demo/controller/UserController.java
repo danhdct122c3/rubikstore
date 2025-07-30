@@ -8,6 +8,7 @@ import RubikStorecom.example.demo.entity.User;
 import RubikStorecom.example.demo.mapper.UserMapper;
 import RubikStorecom.example.demo.repository.UserRepository;
 import RubikStorecom.example.demo.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,7 +29,7 @@ public class UserController {
 
 
     @PostMapping
-    APIResponse<UserResponse> createUser(@RequestBody UserCreationRequest request) {
+    APIResponse<UserResponse> createUser(@Valid @RequestBody UserCreationRequest request) {
 
         return APIResponse.<UserResponse>builder()
                 .result(userService.createUser(request))
@@ -39,6 +40,12 @@ public class UserController {
     APIResponse<List<UserResponse>> getUsers() {
         return APIResponse.<List<UserResponse>>builder()
                 .result(userService.getUsers())
+                .build();
+    }
+    @GetMapping("/{userId}")
+    APIResponse<UserResponse> getUser(@PathVariable String userId) {
+        return APIResponse.<UserResponse>builder()
+                .result(userService.getUser(userId))
                 .build();
     }
 

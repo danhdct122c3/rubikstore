@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -22,11 +23,13 @@ import java.util.Set;
 @AllArgsConstructor// tạo constructor có tham  số
 @FieldDefaults(level = AccessLevel.PRIVATE ) // gán AccessLevel mặc định không cần khai báo trước tên biến
 public class UserCreationRequest {
-
+    @Size(min=5, message = "password must be at least 5 character")
     String username;
+    @Size(min=6, message="password must be at least 6 character")
     String password;
     String firstName;
     String lastName;
+    @Pattern(regexp = "^(0|\\+84)[0-9]{9}$", message = "Số điện thoại không hợp lệ")
     String phoneNumber;
     LocalDate dob;
     String address;
