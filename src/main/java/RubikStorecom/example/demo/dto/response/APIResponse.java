@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL) // bỏ qua các thuộc tính bị null
 @Data
 @Builder
 @AllArgsConstructor

@@ -13,11 +13,11 @@ import java.time.LocalDate;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserUpdateRequest {
-    @Size(min=6, message="password must be at least 6 character")
+    @Size(min=6, message="PASSWORD_INVALID")
     String password;
     String firstName;
     String lastName;
-    @Pattern(regexp = "^(0|\\+84)[0-9]{9}$", message = "Số điện thoại không hợp lệ")
+    @Pattern(regexp = "^(0|\\+84)[0-9]{9}$", message = "PHONENUMBER_INVALID")
     String phoneNumber;
     LocalDate dob;
     String address;

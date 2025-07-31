@@ -6,6 +6,7 @@ import RubikStorecom.example.demo.dto.response.APIResponse;
 import RubikStorecom.example.demo.dto.response.ProductResponse;
 import RubikStorecom.example.demo.mapper.ProductMapper;
 import RubikStorecom.example.demo.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -22,14 +23,14 @@ public class ProductController {
 
 
     @PostMapping
-    public APIResponse<ProductResponse> createProduct(@RequestBody ProductRequest request) {
+    public APIResponse<ProductResponse> createProduct(@Valid @RequestBody ProductRequest request) {
         return APIResponse.<ProductResponse>builder()
                 .result(productService.createProduct(request))
                 .build();
     }
 
     @PutMapping("/{id}")
-    public APIResponse<ProductResponse> updateProduct(@RequestBody ProductRequest request,  @PathVariable String id) {
+    public APIResponse<ProductResponse> updateProduct(@Valid @RequestBody ProductRequest request,  @PathVariable String id) {
         return APIResponse.<ProductResponse>builder()
                 .result(productService.updateProduct(request, id))
                 .build();

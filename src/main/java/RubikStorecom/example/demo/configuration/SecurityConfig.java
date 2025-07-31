@@ -15,7 +15,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-    private final static String[] PUBLIC_ENDPOINTS = {"/users","/users/**"};
+    private final static String[] PUBLIC_ENDPOINTS = {"/users","/users/**","/products","/products/**","/categories","/categories/**"};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

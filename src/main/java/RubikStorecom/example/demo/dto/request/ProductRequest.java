@@ -20,11 +20,11 @@ public class ProductRequest {
     String id;
     String productName;
     String description;
-    @NotNull(message = "số lượng không được để trống")// not blank chỉ dùng được cho string
-    @Min(value=1, message = "số lượng ít nhất là 1 ")
+    @NotNull(message = "NOT_NULL")// not blank chỉ dùng được cho string
+    @Min(value=1, message = "QUANTITY_INVALID")
     Integer quantity;
-    @NotNull(message = "giá không được để trống")
-    @Min(value=1, message = "số giá ít nhất là 1 ")
+    @NotNull(message = "NOT_NULL")
+    @Min(value=1, message = "PRICE_INVALID")
     Integer price;
     Set<String> categories;
 }

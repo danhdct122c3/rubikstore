@@ -4,6 +4,8 @@ import RubikStorecom.example.demo.dto.request.UserCreationRequest;
 import RubikStorecom.example.demo.dto.request.UserUpdateRequest;
 import RubikStorecom.example.demo.dto.response.UserResponse;
 import RubikStorecom.example.demo.entity.User;
+import RubikStorecom.example.demo.exception.AppException;
+import RubikStorecom.example.demo.exception.ErrorCode;
 import RubikStorecom.example.demo.mapper.UserMapper;
 import RubikStorecom.example.demo.repository.UserRepository;
 import lombok.AccessLevel;
@@ -23,9 +25,12 @@ public class UserService {
     UserRepository userRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
+
+
     public UserResponse createUser(UserCreationRequest request) {
         if(userRepository.existsByUsername(request.getUsername()))
-            throw new RuntimeException("Username already exists");
+            throw new AppException(ErrorCode.USER_EXISTED);
+
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
