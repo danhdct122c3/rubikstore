@@ -1,6 +1,7 @@
 package RubikStorecom.example.demo.dto.request;
 
 import RubikStorecom.example.demo.entity.Role;
+import RubikStorecom.example.demo.validator.DobConstraint;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,6 +32,7 @@ public class UserCreationRequest {
     String lastName;
     @Pattern(regexp = "^(0|\\+84)[0-9]{9}$", message = "PHONENUMBER_INVALID")
     String phoneNumber;
+    @DobConstraint(min=2, message = "INVALID_DOB")
     LocalDate dob;
     String address;
 

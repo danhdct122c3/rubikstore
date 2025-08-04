@@ -17,7 +17,8 @@ public enum ErrorCode {
     NOT_NULL(1007,"Please fill in all fields"),
     QUANTITY_INVALID(1008,"Quantity must be at least 1"),
     PRICE_INVALID(1009,"Price must be Positive"),
-    USER_EXISTED(1001,"User existed");
+    USER_EXISTED(1001,"User existed"),
+    INVALID_DOB(1010,"Invalid Dob");
     int code;
     String message;
 }

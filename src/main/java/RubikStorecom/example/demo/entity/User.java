@@ -1,6 +1,7 @@
 package RubikStorecom.example.demo.entity;
 
 
+import RubikStorecom.example.demo.validator.DobConstraint;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -28,8 +29,11 @@ public class User {
     String phoneNumber;
     String firstName;
     String lastName;
+
     LocalDate dob;
     String address;
+
+
     @CreationTimestamp
     @Column(updatable = false)
     LocalDate created;
