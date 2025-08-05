@@ -40,6 +40,8 @@ public class UserCreationRequest {
 
 
 
+
+
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.UUID)  // Sử dụng IDENTITY để tự động tăng ID
 //
