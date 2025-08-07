@@ -20,6 +20,10 @@ public enum ErrorCode {
     PRICE_INVALID(1009,"Price must be Positive"),
     USER_EXISTED(1001,"User existed"),
     USER_NOT_EXISTED(1011,"User existed"),
+    PERMISSION_EXISTED(1013,"Permission existed"),
+    PERMISSION_NOT_EXISTED(1014,"Permission not existed"),
+    ROLE_EXISTED(1015,"Role existed"),
+    ROLE_NOT_EXISTED(1016,"Role not existed"),
     INVALID_DOB(1010,"Invalid Dob");
     int code;
     String message;
