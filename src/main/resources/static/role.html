@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Management</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Role Management System</h1>
+
+    <!-- Create Role Form -->
+    <div class="form-section">
+        <h2>Create Role</h2>
+        <form id="createRoleForm">
+            <input type="text" id="roleName" placeholder="Role Name" required>
+            <input type="text" id="roleDescription" placeholder="Description" required>
+<!--            <input type="text" id="permissions" placeholder="Permissions (comma separated)">-->
+            <label for="loadPermission">Select Permissions:</label>
+            <select id="loadPermission">
+
+            </select>
+            <button type="submit">Create Role</button>
+        </form>
+    </div>
+
+    <!-- Roles List -->
+    <div class="roles-section">
+        <h2>All Roles</h2>
+        <button id="loadRoles">Load Roles</button>
+        <div id="rolesList"></div>
+    </div>
+</div>
+
+<script src="/home/js/role.js"></script>
+</body>
+</html>

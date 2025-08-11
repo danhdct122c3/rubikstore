@@ -16,8 +16,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
+@CrossOrigin(origins = "*") //
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
-@RequestMapping("roles")
+@RequestMapping("/roles")
 public class RoleController {
     RoleService roleService;
     @PostMapping()
@@ -39,7 +40,7 @@ public class RoleController {
     }
 
     @GetMapping
-    public APIResponse<List<RoleResponse>> getAllRole(){
+    public APIResponse<List<RoleResponse>> getAll(){
         return APIResponse.<List<RoleResponse>>builder()
                 .result(roleService.getAll())
                 .build();

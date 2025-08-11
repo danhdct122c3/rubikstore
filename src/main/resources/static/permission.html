@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permission Management</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Permission Management System</h1>
+
+
+    <div class="form-section">
+        <h2>Create Permission</h2>
+        <form id="createPermissionForm">
+            <input type="text" id="permissionName" placeholder="Permission Name" required>
+            <input type="text" id="permissionDescription" placeholder="Description" required>
+<!--            <input type="text" id="permissions" placeholder="Permissions (comma separated)">-->
+
+
+            <button type="submit">Create Permission</button>
+        </form>
+    </div>
+
+    <!-- Permission List -->
+    <div class="permissions-section">
+        <h2>All Permission</h2>
+        <button id="loadPermission">Load Permission</button>
+        <div id="permissionList"></div>
+    </div>
+</div>
+
+<script src="/home/js/permission.js"></script>
+</body>
+</html>

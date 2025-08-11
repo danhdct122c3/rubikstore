@@ -20,7 +20,17 @@ public class SecurityConfig {
                                                         ,"/categories","/categories/**"
                                                         ,"/authenticate/**"
                                                         ,"/roles/**","/roles"
-                                                        ,"permission", "permission/**"};
+                                                        ,"/permission", "permission/**"
+                                                        ,"/",
+                                                        "/role.html",
+                                                        "/permission.html",
+                                                        "/css/**",
+                                                        "/js/**",
+                                                        "/images/**",
+                                                        "/*.html",
+                                                        "/*.css",
+                                                        "/*.js"};
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
