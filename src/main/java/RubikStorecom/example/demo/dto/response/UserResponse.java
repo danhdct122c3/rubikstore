@@ -21,6 +21,5 @@ public class UserResponse {
     LocalDate dob;
     String address;
     LocalDate created;
-
-//    Set<RoleResponse> roles;
+    Set<RoleResponse> roles;
 }

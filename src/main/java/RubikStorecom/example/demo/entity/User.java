@@ -32,8 +32,6 @@ public class User {
 
     LocalDate dob;
     String address;
-
-
     @CreationTimestamp
     @Column(updatable = false)
     LocalDate created;

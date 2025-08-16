@@ -14,7 +14,7 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-.form-section, .roles-section, .permissions-section {
+.form-section {
     margin-bottom: 30px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -43,7 +43,7 @@ button:hover {
     background-color: #0056b3;
 }
 
-.role-item, .permission-item {
+.item {
     border: 1px solid #eee;
     padding: 15px;
     margin: 10px 0;
@@ -51,16 +51,16 @@ button:hover {
     background-color: #f9f9f9;
 }
 
-.role-item h3, .permission-item h3 {
+.item h3 {
     margin: 0 0 10px 0;
     color: #333;
 }
 
-.role-item button, .permission-item button {
+.item button{
     background-color: #dc3545;
     margin-top: 10px;
 }
 
-.role-item button:hover, .permission-item button:hover {
+.item button:hover {
     background-color: #c82333;
 }

@@ -3,6 +3,7 @@ package RubikStorecom.example.demo.service;
 import RubikStorecom.example.demo.dto.request.UserCreationRequest;
 import RubikStorecom.example.demo.dto.request.UserUpdateRequest;
 import RubikStorecom.example.demo.dto.response.UserResponse;
+import RubikStorecom.example.demo.entity.Role;
 import RubikStorecom.example.demo.entity.User;
 import RubikStorecom.example.demo.exception.AppException;
 import RubikStorecom.example.demo.exception.ErrorCode;
@@ -15,7 +16,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor // tự dộng tạo constructor cho cáo biến được khai báo final
@@ -25,14 +28,18 @@ public class UserService {
     UserRepository userRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
+    RoleService roleService;
 
 
     public UserResponse createUser(UserCreationRequest request) {
         if(userRepository.existsByUsername(request.getUsername()))
             throw new AppException(ErrorCode.USER_EXISTED);
-
+        Role roleUser= roleService.getUserRole();
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Set<Role> roles= new HashSet<>();
+        roles.add(roleUser);
+        user.setRoles(roles);
         User savedUser = userRepository.save(user);
         return userMapper.toUserResponse(savedUser);
     }

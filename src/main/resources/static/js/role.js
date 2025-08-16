@@ -63,7 +63,7 @@ async function loadRoles() {
         if (data.result && data.result.length > 0) {
             data.result.forEach(role => {
                 const roleDiv = document.createElement('div');
-                roleDiv.className = 'role-item';
+                roleDiv.className = 'item';
                 roleDiv.innerHTML = `
                     <h3>${role.name}</h3>
                     <p>${role.description}</p>

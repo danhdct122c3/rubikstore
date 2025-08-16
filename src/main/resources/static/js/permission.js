@@ -1,5 +1,6 @@
 const API_ROLE = '/home/roles';
 const API_PERMISSION = '/home/permission';
+
 // Create Role
 document.getElementById('createPermissionForm').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -62,7 +63,7 @@ async function loadPermissions() {
         if (data.result && data.result.length > 0) {
             data.result.forEach(permission => {
                 const permissionDiv = document.createElement('div');
-                permissionDiv.className = 'permission-item';
+                permissionDiv.className = 'item';
                 permissionDiv.innerHTML = `
                     <h3>${permission.name}</h3>
                     <p>${permission.description}</p>

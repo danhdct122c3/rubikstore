@@ -16,14 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
     private final static String[] PUBLIC_ENDPOINTS = {"/users","/users/**"
-                                                        ,"/products","/products/**"
-                                                        ,"/categories","/categories/**"
-                                                        ,"/authenticate/**"
-                                                        ,"/roles/**","/roles"
-                                                        ,"/permission", "permission/**"
-                                                        ,"/",
-                                                        "/role.html",
-                                                        "/permission.html",
+//                                                        ,"/products","/products/**"
+//                                                        ,"/categories","/categories/**"
+                                                        ,"/authenticate/**",
+//                                                        ,"/roles/**","/roles"
+//                                                        ,"/permission", "permission/**,
                                                         "/css/**",
                                                         "/js/**",
                                                         "/images/**",
@@ -42,8 +39,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll() // cho phép truy cập không cần xác thực
                 .requestMatchers(HttpMethod.PUT, PUBLIC_ENDPOINTS).permitAll() // cho phép truy cập không cần xác thực
                 .requestMatchers(HttpMethod.DELETE, PUBLIC_ENDPOINTS).permitAll()
-                .anyRequest()
-                .authenticated());
+                .anyRequest().authenticated());
         return http.build();
     }
 

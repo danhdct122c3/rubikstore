@@ -51,6 +51,10 @@ public class RoleService {
         return roles.stream().map(roleMapper::toRoleResponse).toList();
     }
 
+    public Role getUserRole(){
+        return roleRepository.findByName("USER");
+    }
+
 
 
 
