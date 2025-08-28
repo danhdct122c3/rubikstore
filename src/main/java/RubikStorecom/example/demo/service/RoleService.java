@@ -55,6 +55,10 @@ public class RoleService {
         return roleRepository.findByName("USER");
     }
 
+    public Role getAdminRole(){
+        return roleRepository.findByName("ADMIN");
+    }
+
 
 
 

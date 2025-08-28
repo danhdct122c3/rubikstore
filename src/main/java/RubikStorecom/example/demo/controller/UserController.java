@@ -12,6 +12,8 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,13 +37,16 @@ public class UserController {
                 .result(userService.createUser(request))
                 .build();
     }
-
+    //PreAuthorize kiểm tra role là admin thì mới dc truy  cập vào method
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     APIResponse<List<UserResponse>> getUsers() {
         return APIResponse.<List<UserResponse>>builder()
                 .result(userService.getUsers())
                 .build();
     }
+    //PostAuthorize kiểm tra userid là chính user đó thì mới dc trả về
+    @PreAuthorize("hasRole('ADMIN') or #userId == authentication.name") // ✅ Admin hoặc chính user đó
     @GetMapping("/{userId}")
     APIResponse<UserResponse> getUser(@PathVariable String userId) {
         return APIResponse.<UserResponse>builder()
@@ -49,6 +54,13 @@ public class UserController {
                 .build();
     }
 
+    @GetMapping("/myInfo")
+    APIResponse<UserResponse> getMyInfo() {
+        return APIResponse.<UserResponse>builder()
+                .result(userService.getMyInfo())
+                .build();
+    }
+    @PreAuthorize("hasRole('ADMIN') or #userId == authentication.name") // ✅ Admin hoặc chính user đó
     @PutMapping("/{userId}")
     APIResponse<UserResponse> updateUser (@Valid @PathVariable String userId ,@RequestBody UserUpdateRequest request) {
 
@@ -57,7 +69,7 @@ public class UserController {
                 .result(userMapper.toUserResponse(updated))
                 .build();
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{userId}")
     public APIResponse<Void> deleteUser(@PathVariable String userId) {
         userService.delUser(userId);

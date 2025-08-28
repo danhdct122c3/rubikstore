@@ -15,7 +15,7 @@ document.getElementById('createCategoryForm').addEventListener('submit', async (
         console.log('Calling API:', API_CATEGORY); // ✅ Debug log
 
 
-        const response = await fetch(API_CATEGORY, {
+        const response  =await fetchWithAuth(API_CATEGORY, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ async function loadCategories() {
     try {
         console.log('Loading categories from:', API_CATEGORY); // ✅ Debug log
 
-        const response = await fetch(API_CATEGORY);
+        const response= await fetchWithAuth(API_CATEGORY);
 
         console.log('Response status:', response.status); // ✅ Debug log
         console.log('Response URL:', response.url); // ✅ Debug log
@@ -88,7 +88,7 @@ async function deleteCategory(id,name) {
     }
 
     try {
-        const response = await fetch(`${API_CATEGORY}/${id}`, {
+        const response = await fetchWithAuth(`${API_CATEGORY}/${id}`, {
             method: 'DELETE'
         });
 
@@ -96,7 +96,7 @@ async function deleteCategory(id,name) {
             throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
 
-        const result = await response.json();
+
 
         alert('category deleted successfully!');
         loadCategories();
@@ -107,4 +107,8 @@ async function deleteCategory(id,name) {
 }
 
 // Load roles on page load
-window.addEventListener('load', loadCategories);
+window.addEventListener('load',  () => {
+    if (checkAuth()) { // Function từ auth.js
+        loadCategories();
+    }
+});

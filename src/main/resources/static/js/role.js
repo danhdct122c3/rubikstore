@@ -16,7 +16,7 @@ document.getElementById('createRoleForm').addEventListener('submit', async (e) =
     try {
         console.log('Calling API:', API_ROLE); // ✅ Debug log
 
-        const response = await fetch(API_ROLE, {
+        const response = await fetchWithAuth(API_ROLE, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ async function loadRoles() {
     try {
         console.log('Loading roles from:', API_ROLE); // ✅ Debug log
 
-        const response = await fetch(API_ROLE);
+        const response = await fetchWithAuth(API_ROLE);
 
         console.log('Response status:', response.status); // ✅ Debug log
         console.log('Response URL:', response.url); // ✅ Debug log
@@ -85,7 +85,7 @@ async function LoadPermission() {
     try {
         console.log('Loading permission from:', API_PERMISSION); // ✅ Debug log
 
-        const response = await fetch(API_PERMISSION);
+        const response = await fetchWithAuth(API_PERMISSION);
 
         console.log('Response status:', response.status); // ✅ Debug log
         console.log('Response URL:', response.url); // ✅ Debug log
@@ -133,7 +133,7 @@ async function deleteRole(roleName) {
     }
 
     try {
-        const response = await fetch(`${API_ROLE}/${roleName}`, {
+        const response = await fetchWithAuth(`${API_ROLE}/${roleName}`, {
             method: 'DELETE'
         });
 
@@ -152,5 +152,9 @@ async function deleteRole(roleName) {
 }
 
 // Load roles on page load
-window.addEventListener('load', loadRoles);
-window.addEventListener('load', LoadPermission);
+window.addEventListener('load',() => {
+    if(checkAuth()) {
+        loadRoles();
+        LoadPermission();
+    }
+});

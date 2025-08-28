@@ -92,7 +92,7 @@ function checkAuth() {
     if (!token) {
         console.log('token: ', token);
 
-        // window.location.href = '/home/login.html';
+        window.location.href = '/home/login.html';
         return false;
     }
     return true;

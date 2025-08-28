@@ -9,35 +9,37 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "orders") // ✅ Thêm table name
+@Table(name = "carts") // ✅ Thêm table name
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Orders {
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)  // Sử dụng IDENTITY để tự động tăng ID
     String id;
-    String userid;
-    @CreationTimestamp
-    LocalDateTime orderDate;
-    @Column(name = "total_amount", precision = 15, scale = 2)
-    BigDecimal totalAmount;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    OrderStatus status;
+    @OneToOne(fetch = FetchType.LAZY) // ✅ Thêm relationship
+    @JoinColumn(name = "user_id", unique = true)
+    User user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<OrderItem> items = new ArrayList<>();
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true) // ✅ Thêm relationship
+    @Builder.Default
+    List<CartItem> items = new ArrayList<>();
+
+    @Column(precision = 10, scale=2)
+    BigDecimal totalAmount= BigDecimal.ZERO;
+    @CreationTimestamp
+    LocalDateTime createdAt;
 
     @UpdateTimestamp
     LocalDateTime updatedAt;
+
+
 
 }

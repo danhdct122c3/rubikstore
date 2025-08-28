@@ -83,7 +83,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
             alert('Login successfully!');
 
             if (saveAuthToken(result)) {
-                window.location.href = '/home/createproduct.html';
+                window.location.href = '/home/index.html';
             }
             console.log('token:', extractApiData(result).token);
 

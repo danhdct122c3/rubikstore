@@ -134,8 +134,6 @@ async function loadCategory() {
 
                 categorySelect.appendChild(optionElement);
 
-
-
             });
         } else {
             categorySelect.innerHTML = ' <option>no category</option>';

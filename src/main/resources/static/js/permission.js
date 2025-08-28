@@ -16,7 +16,7 @@ document.getElementById('createPermissionForm').addEventListener('submit', async
     try {
         console.log('Calling API:', API_PERMISSION); // ✅ Debug log
 
-        const response = await fetch(API_PERMISSION, {
+        const response = await fetchWithAuth(API_PERMISSION, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ async function loadPermissions() {
     try {
         console.log('Loading roles from:', API_PERMISSION); // ✅ Debug log
 
-        const response = await fetch(API_PERMISSION);
+        const response = await fetchWithAuth(API_PERMISSION);
 
         console.log('Response status:', response.status); // ✅ Debug log
         console.log('Response URL:', response.url); // ✅ Debug log
@@ -89,7 +89,7 @@ async function deletePermission(permissionName) {
     }
 
     try {
-        const response = await fetch(`${API_PERMISSION}/${permissionName}`, {
+        const response = await fetchWithAuth(`${API_PERMISSION}/${permissionName}`, {
             method: 'DELETE'
         });
 
@@ -108,4 +108,6 @@ async function deletePermission(permissionName) {
 }
 
 // Load roles on page load
-window.addEventListener('load', loadPermissions);
+window.addEventListener('load',() => {
+    if(checkAuth()) loadPermissions();
+});

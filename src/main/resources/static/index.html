@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/home/css/index.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+  <div class="header-container">
+    <div class="logo">
+      <i class="fas fa-cogs"></i>
+      <h1>Admin Dashboard</h1>
+    </div>
+    <div class="user-info">
+      <div class="user-profile">
+        <i class="fas fa-user-circle"></i>
+        <span id="username">Loading...</span>
+        <button id="logoutBtn" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+  <div class="container">
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+      <h2>Welcome to Admin Dashboard</h2>
+      <p>Manage your system efficiently with our comprehensive admin tools</p>
+    </section>
+
+    <!-- Navigation Cards -->
+    <section class="nav-cards">
+      <div class="card-grid">
+        <!-- Product Management -->
+        <div class="nav-card" onclick="navigateTo('/home/createproduct.html')">
+          <div class="card-icon">
+            <i class="fas fa-box"></i>
+          </div>
+          <div class="card-content">
+            <h3>Products</h3>
+            <p>Manage product inventory, add new products, update details</p>
+          </div>
+          <div class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+
+        <!-- Category Management -->
+        <div class="nav-card" onclick="navigateTo('/home/createcategory.html')">
+          <div class="card-icon">
+            <i class="fas fa-tags"></i>
+          </div>
+          <div class="card-content">
+            <h3>Categories</h3>
+            <p>Organize products into categories, create and manage groups</p>
+          </div>
+          <div class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+
+        <!-- Role Management -->
+        <div class="nav-card" onclick="navigateTo('/home/role.html')">
+          <div class="card-icon">
+            <i class="fas fa-user-tag"></i>
+          </div>
+          <div class="card-content">
+            <h3>Roles</h3>
+            <p>Define user roles and access levels for system security</p>
+          </div>
+          <div class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+
+        <!-- Permission Management -->
+        <div class="nav-card" onclick="navigateTo('/home/permission.html')">
+          <div class="card-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="card-content">
+            <h3>Permissions</h3>
+            <p>Control access permissions and user privileges</p>
+          </div>
+          <div class="card-arrow">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="quick-stats">
+      <h3>Quick Overview</h3>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i class="fas fa-box"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-number" id="totalProducts">-</span>
+            <span class="stat-label">Total Products</span>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i class="fas fa-tags"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-number" id="totalCategories">-</span>
+            <span class="stat-label">Categories</span>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-number" id="totalRoles">-</span>
+            <span class="stat-label">User Roles</span>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-number" id="totalPermissions">-</span>
+            <span class="stat-label">Permissions</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- Scripts -->
+<script src="/home/js/auth.js"></script>
+<script src="/home/js/index.js"></script>
+</body>
+</html>
