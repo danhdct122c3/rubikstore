@@ -2,6 +2,7 @@ package RubikStorecom.example.demo.entity;
 
 
 import RubikStorecom.example.demo.enums.OrderStatus;
+import RubikStorecom.example.demo.enums.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -26,10 +27,19 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.UUID)  // Sử dụng IDENTITY để tự động tăng ID
     String id;
     String userid;
+    String shippingAddress;
+    String PhoneNumber;
+    String note;
+
+    @Enumerated(EnumType.STRING)
+    PaymentMethod paymentMethod;
+
     @CreationTimestamp
     LocalDateTime orderDate;
+
     @Column(name = "total_amount", precision = 15, scale = 2)
     BigDecimal totalAmount;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     OrderStatus status;

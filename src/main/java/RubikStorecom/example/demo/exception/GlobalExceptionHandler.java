@@ -3,8 +3,6 @@ package RubikStorecom.example.demo.exception;
 import RubikStorecom.example.demo.dto.response.APIResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,26 +34,13 @@ ResponseEntity<APIResponse> handlingRuntimeException(Exception e){
     ResponseEntity<APIResponse> handlingAppException(AppException e){
        ErrorCode errorCode= e.getErrorCode();
 
-        return ResponseEntity.status(errorCode.getStatusCode()).body(
+        return ResponseEntity.badRequest().body(
                 APIResponse.builder()
                         .code(errorCode.getCode())
                         .message(errorCode.getMessage())
                         .build()
         );
     }
-
-    @ExceptionHandler(value = AccessDeniedException.class)
-    ResponseEntity<APIResponse> handlingAccessDeniedException(AccessDeniedException e){
-        ErrorCode errorCode= ErrorCode.UNAUTHORIZED;
-
-        return ResponseEntity.status(errorCode.getStatusCode()).body(
-                APIResponse.builder()
-                        .code(errorCode.getCode())
-                        .message(errorCode.getMessage())
-                        .build()
-        );
-    }
-
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     ResponseEntity<APIResponse> handlingValidation(MethodArgumentNotValidException e)

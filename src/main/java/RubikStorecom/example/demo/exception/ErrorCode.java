@@ -31,6 +31,7 @@ public enum ErrorCode {
     CART_NOT_EXISTED(1018,"Cart not existed",HttpStatus.NOT_FOUND),
     PRODUCT_ID_REQUIRED(1019,"productId must be filled",HttpStatus.BAD_REQUEST),
     NOT_FOUND_ITEM(1021," Not found",HttpStatus.NOT_FOUND),
+    NOT_FOUND_ORDER(1022," Not found",HttpStatus.NOT_FOUND),
     EMPTY_CART(1020,"you haven't product in your  cart",HttpStatus.NOT_FOUND),
     INVALID_DOB(1010,"Invalid Dob",HttpStatus.BAD_REQUEST);
 

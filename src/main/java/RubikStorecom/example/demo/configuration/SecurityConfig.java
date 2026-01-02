@@ -10,13 +10,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.Collection;
@@ -32,11 +30,10 @@ public class SecurityConfig {
     @Autowired
     private CustomJWTDecoder customJwtDecoder;
 
-    private final static String[] PUBLIC_ENDPOINTS = {
-                                                        "/users",
-//                                                        ,"/products","/products/**",
+    private final static String[] PUBLIC_ENDPOINTS = {"/users","/users/**"
+//                                                        ,"/products","/products/**"
 //                                                        ,"/categories","/categories/**"
-                                                        "/authenticate/**",
+                                                        ,"/authenticate/**",
 //                                                        ,"/roles/**","/roles"
 //                                                        ,"/permission", "permission/**,
                                                         "/css/**",
@@ -52,15 +49,17 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // tắt để bỏ qua bước xác thực token
                 .authorizeHttpRequests(authorize -> authorize
+
+                .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS).permitAll() // cho phép truy cập không cần xác thực
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll() // cho phép truy cập không cần xác thực
+                .requestMatchers(HttpMethod.PUT, PUBLIC_ENDPOINTS).permitAll() // cho phép truy cập không cần xác thực
+                .requestMatchers(HttpMethod.DELETE, PUBLIC_ENDPOINTS).permitAll()
                 .anyRequest().authenticated());
 
         http.oauth2ResourceServer(oauth2 ->
                 oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(customJwtDecoder)
                         .jwtAuthenticationConverter(jwtAuthenticationConverter()))
-                        .authenticationEntryPoint(new JWTAuthenticationEntryPoint())
                 );
-
         return http.build();
     }
 
@@ -81,10 +80,10 @@ public class SecurityConfig {
 
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
-
+        log.info("dang dc goi");
         JwtGrantedAuthoritiesConverter converter = new JwtGrantedAuthoritiesConverter();
         converter.setAuthoritiesClaimName("Scope"); // hoặc "scope"
-        converter.setAuthorityPrefix("");
+        converter.setAuthorityPrefix("ROLE_");
 
         JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
         jwtConverter.setJwtGrantedAuthoritiesConverter(jwt -> {

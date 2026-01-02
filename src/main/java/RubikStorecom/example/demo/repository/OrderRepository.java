@@ -17,4 +17,6 @@ public interface OrderRepository extends JpaRepository<Orders, String> {
     Optional<Cart> findItemByProductId(@Param("productId") String productId);
 
 
+
+    Orders findByUserid(String userid);
 }

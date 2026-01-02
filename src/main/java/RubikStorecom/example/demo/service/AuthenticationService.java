@@ -88,6 +88,7 @@ public class AuthenticationService {
 
         Payload payload= new Payload(jwtClaimsSet.toJSONObject());
         JWSObject jwsObject= new JWSObject(header,payload);
+        log.info(jwtClaimsSet.getClaim(user.getUsername()).toString());
         try {
             jwsObject.sign(new MACSigner(SIGNER_KEY.getBytes()));
             return jwsObject.serialize();
@@ -102,9 +103,9 @@ public class AuthenticationService {
         StringJoiner stringJoiner = new StringJoiner(" ");
         if(!CollectionUtils.isEmpty(user.getRoles())){
             user.getRoles().forEach(role -> {
-                stringJoiner.add("ROLE_" + role.getName()); // Không thêm prefix ROLE_ ở đây
+                stringJoiner.add(role.getName()); // Không thêm prefix ROLE_ ở đây
                 if(!CollectionUtils.isEmpty(role.getPermissions()))
-                    role.getPermissions().forEach(permission -> stringJoiner.add("PERMISSION_"+ permission.getName()));
+                    role.getPermissions().forEach(permission -> stringJoiner.add(permission.getName()));
             });
         }
         return stringJoiner.toString();
